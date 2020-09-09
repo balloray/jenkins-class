@@ -57,7 +57,7 @@ podTemplate(name: k8slabel, label: k8slabel, yaml: slavePodTemplate, showRawYaml
                     }
 
                     stage('Docker Push') {
-                        sh 'docker tag -t artemis balloray/artemis'
+                        sh 'docker tag artemis balloray/artemis'
                         sh 'docker push balloray/artemis'
                     }
                 }
