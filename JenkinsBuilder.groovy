@@ -59,18 +59,12 @@ podTemplate(name: k8slabel, label: k8slabel, yaml: slavePodTemplate, showRawYaml
                         sh 'docker build -t artemis .'
                     }
                     stage('Docker Login'){
-                        sh 'docker login --username --password'
+                        sh "docker login --username $USERNAME --password $PASSWORD"
                     }
 
                     stage('Docker Push') {
-                        if (params.pushLatest) {
-                            println('Pushing the image to latest version!!')
-                            sh "docker tag artemis balloray/artemis:latest"
-                            sh "docker push balloray/artemis:latest"
-                        } 
-
-                        sh "docker tag artemis balloray/artemis:${branch}"
-                        sh "docker push balloray/artemis:${branch}"
+                        sh 'docker tag -t artemis fsadykov/artemis'
+                        sh 'docker push fsadykov/artemis'
                     }
                 }
             }
