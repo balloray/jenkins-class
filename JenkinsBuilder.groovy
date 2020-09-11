@@ -11,7 +11,7 @@ if (branch == 'master') {
 
 else if (branch.contains('dev-feature')) {
 println("The application will be desplyed staging envinroment!")
-  environment = "stage" 
+  environment = "dev" 
 }
 
 else if (branch.contains('qa-feature')) {
