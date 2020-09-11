@@ -20,9 +20,9 @@ println("The application will be desplyed staging envinroment!")
   environment = "qa" 
 }
 else {
-  println ('Please use proper name for your branch!')
-  currentBuild.result = 'FAILURE'
-  println("ERROR Detected:")
+   println('Please use proper name for your branch!')
+  currentBuild.result = 'FAILURE'	      
+  error('Please use proper name for your branch!')
 }
 
 
