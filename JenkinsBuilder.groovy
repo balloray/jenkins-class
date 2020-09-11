@@ -2,7 +2,6 @@
 def k8slabel = "jenkins-pipeline-${UUID.randomUUID().toString()}"
 def branch = "${scm.branches[0].name}".replaceAll(/^\*\//, '')
 def gitCommitHash = ''
-
 def environment = ""
 
 if (branch == 'master') {
@@ -105,7 +104,7 @@ podTemplate(name: k8slabel, label: k8slabel, yaml: slavePodTemplate, showRawYaml
                         booleanParam(name: 'applyChanges', value: true), 
                         booleanParam(name: 'destroyChanges', value: false), 
                         string(name: 'selectedDockerImage', value: "balloray/artemis:${gitCommitHash}"), 
-                        string(name: 'environment', value: 'dev')
+                        string(name: 'environment', value:"${environment}")
                         ]
 
                     }
