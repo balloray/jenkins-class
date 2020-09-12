@@ -70,8 +70,8 @@ podTemplate(name: k8slabel, label: k8slabel, yaml: slavePodTemplate, showRawYaml
             }
         }
         stage("destroy"){
-            if (!applyChanges) {
-                if (destroyChanges) {
+            if (!params.applyChanges) {
+                if (params.destroyChanges) {
                     println("Destroying everything")
                 } 
             } else {
