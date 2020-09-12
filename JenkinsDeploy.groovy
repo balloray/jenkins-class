@@ -59,7 +59,23 @@ podTemplate(name: k8slabel, label: k8slabel, yaml: slavePodTemplate, showRawYaml
 
         stage("Apply/Plan") {
             container("fuchicorptools") {
-                sh 'kubectl --version'
+                if (!params.destroyChanges) {
+                    if (params.applyChanges) {
+                        println("Applying the changes!")
+                    } else {
+                        println("Planing the changes")
+                    }
+                }
+
+            }
+        }
+        stage("destroy"){
+            if (!applyChanges) {
+                if (destroyChanges) {
+                    println("Destroying everything")
+                } 
+            } else {
+                println(Sorry I can not destroy and apply)
             }
         }
     }
