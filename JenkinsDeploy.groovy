@@ -66,6 +66,7 @@ podTemplate(name: k8slabel, label: k8slabel, yaml: slavePodTemplate, showRawYaml
 
             }
         }
+        
         stage("destroy"){
             if (!params.applyChanges) {
                 if (params.destroyChanges) {
@@ -73,11 +74,6 @@ podTemplate(name: k8slabel, label: k8slabel, yaml: slavePodTemplate, showRawYaml
                 } 
             } else {
                 println("Sorry I can not destroy and apply")
-            }
-        }
-        stage("kubectl") {
-            container("fuchicorptools") {
-                sh 'kubectl version'
             }
         }
     }
