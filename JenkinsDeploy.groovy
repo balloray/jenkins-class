@@ -72,7 +72,7 @@ podTemplate(name: k8slabel, label: k8slabel, yaml: slavePodTemplate, showRawYaml
                     println("Destroying everything")
                 } 
             } else {
-                println(Sorry I can not destroy and apply)
+                println("Sorry I can not destroy and apply")
             }
         }
         stage("kubectl") {
