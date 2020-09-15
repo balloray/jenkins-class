@@ -53,30 +53,30 @@ def slavePodTemplate = """
               path: /var/run/docker.sock
     """
 
-    properties([
-        [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false], 
-        parameters([
-            booleanParam(defaultValue: false, description: 'Pleas select this to be able to run the on debug mode', name: 'debugMode')
-            ])
+properties([
+    [$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false], 
+    parameters([
+        booleanParam(defaultValue: false, description: 'Pleas select this to be able to run the on debug mode', name: 'debugMode')
         ])
+    ])
 
 
-    podTemplate(name: k8slabel, label: k8slabel, yaml: slavePodTemplate, showRawYaml: params.debugMode) {
-      node(k8slabel) {
-        stage("Docker check") {
-            container("docker") {
-                sh 'docker --version'
-            }
+podTemplate(name: k8slabel, label: k8slabel, yaml: slavePodTemplate, showRawYaml: params.debugMode) {
+  node(k8slabel) {
+    stage("Docker check") {
+        container("docker") {
+            sh 'docker --version'
         }
-        stage("Terraform Check") {
-            container("terraform") {
-                sh 'terraform version'
-            }
-        }
-        stage("Packer Check") {
-            container("packer") {
-                sh 'packer version'
-            }
-        }
-      }
     }
+    stage("Terraform Check") {
+        container("terraform") {
+            sh 'terraform version'
+        }
+    }
+    stage("Packer Check") {
+        container("packer") {
+            sh 'packer version'
+        }
+    }
+  }
+}
