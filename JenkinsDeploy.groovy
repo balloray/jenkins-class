@@ -54,8 +54,29 @@ podTemplate(name: k8slabel, label: k8slabel, yaml: slavePodTemplate, showRawYaml
         stage("Checkout SCM"){
           git 'https://github.com/balloray/jenkins-class.git'
         }
-
         stage("Apply/Plan") {
+            container("fuchicorptools") {
+                if (!params.destroyChanges) {
+                    if (params.applyChanges) {
+                        println("Applying the changes!")
+                    } else {
+                        println("Planing the changes")
+                    }
+                }
+
+            }
+        }
+        stage("destroy"){
+            if (!params.applyChanges) {
+                if (params.destroyChanges) {
+                    println("Destroying everything")
+                } 
+            } else {
+                println(Sorry I can not destroy and apply)
+            }
+        }
+
+        stage("kubectl") {
             container("fuchicorptools") {
                 sh 'kubectl version'
             }
