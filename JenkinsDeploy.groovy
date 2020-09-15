@@ -63,17 +63,19 @@ podTemplate(name: k8slabel, label: k8slabel, yaml: slavePodTemplate, showRawYaml
                         println("Planing the changes")
                     }
                 }
-
             }
         }
-        
+
         stage("destroy"){
             if (!params.applyChanges) {
                 if (params.destroyChanges) {
                     println("Destroying everything")
                 } 
-            } else {
+            } 
+            if (params.applyChanges) {
+                if (params.destroyChanges) {
                 println("Sorry I can not destroy and apply")
+                }
             }
         }
     }
