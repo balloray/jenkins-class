@@ -35,12 +35,12 @@ def slavePodTemplate = """
             hostPath:
               path: /var/run/docker.sock
     """
-    podTemplate(name: k8slabel, label: k8slabel, yaml: slavePodTemplate, showRawYaml: false) {
-      node(k8slabel) {
-        stage("Docker check") {
-            container("docker") {
-                sh 'docker --version'
-            }
+podTemplate(name: k8slabel, label: k8slabel, yaml: slavePodTemplate, showRawYaml: false) {
+  node(k8slabel) {
+    stage("Docker check") {
+        container("docker") {
+            sh 'docker --version'
         }
-      }
     }
+  }
+}
